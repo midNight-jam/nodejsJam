@@ -1,0 +1,30 @@
+<html>
+	<body>
+		<script>
+		
+			this.x = 9;
+			var module = {
+				x : 81,
+				getX : function(){
+					console.log(this.x);
+					console.log(this.z);
+				}
+			};
+			
+			console.log(module.getX());
+			
+			var fetcher = module.getX;
+			console.log("Fethcer Called");
+			this.z = 77;
+			fetcher(); // uses gloabl scope & logs z  = 77
+			
+			// Forever Bind the fetcher functionality to module scope
+			var bindedGetX = fetcher.bind(module);
+			console.log("BindedGetX Called");
+			module.z = 66;
+			bindedGetX(); //as bindedGetX is forever bounded to moudle scope it logs z = 66
+			// this is the diff bewteen bind vs call/apply
+			// bind binds the function forever, call/apply works only for that particular scope
+		</script>
+	</body>
+</html>
